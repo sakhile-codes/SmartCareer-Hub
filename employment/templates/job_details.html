@@ -1,0 +1,27 @@
+<!-- job_details.html -->
+{% extends 'base.html' %}
+
+{% block title %}Job Details{% endblock %}
+
+{% block content %}
+<h2>Job Details</h2>
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">{{ job.title }}</h5>
+        <p class="card-text">{{ job.description }}</p>
+        <p class="card-text">Posted: {{ job.posted_date }}</p>
+        <p class="card-text">Deadline: {{ job.deadline }}</p>
+
+        {% if is_matched %}
+        <a href="{{ job.apply_link }}" class="btn btn-primary" target="_blank">Apply Now</a>
+        {% else %}
+        <p>Your profile does not match the job requirements. Consider learning the following skills:</p>
+        <ul>
+            {% for skill in recommended_skills %}
+            <li>{{ skill }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

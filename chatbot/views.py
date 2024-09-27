@@ -8,15 +8,15 @@ import os
 from twilio.rest import Client
 
 # Set your OpenAI API key
-openai.api_key = os.getenv('OPENAI_API_KEY')
-OPENAI_ENDPOINT = 'https://api.openai.com/v1/chat/completions'
-OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
+# openai.api_key = os.getenv('OPENAI_API_KEY')
+# OPENAI_ENDPOINT = 'https://api.openai.com/v1/chat/completions'
+# OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
 
 # Set your Twilio credentials (use environment variables for security)
-twilio_sid = os.getenv('twilio_sid')
-twilio_auth_token = os.getenv('twilio_auth_token')
+# twilio_sid = os.getenv('twilio_sid')
+# twilio_auth_token = os.getenv('twilio_auth_token')
 
-client = Client(twilio_sid, twilio_auth_token)
+# client = Client(twilio_sid, twilio_auth_token)
 
 def generate_response(user_input):
     persona = """

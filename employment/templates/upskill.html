@@ -1,0 +1,40 @@
+<!-- upskill.html -->
+{% extends 'base.html' %}
+
+{% block title %}Upskill{% endblock %}
+
+{% block content %}
+<h2>Upskill</h2>
+{% for category, skills in skill_categories.items %}
+<h4>{{ category }}</h4>
+<div class="row">
+    {% for skill in skills %}
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">{{ skill.name }}</h5>
+                <p class="card-text">{{ skill.description }}</p>
+                <p class="card-text">Estimated Learning Time: {{ skill.learning_time }}</p>
+                <a href="{{ skill.learning_link }}" class="btn btn-primary" target="_blank">Learn</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endfor %}
+
+<h4>Learn and Earn Opportunities</h4>
+<div class="row">
+    {% for opportunity in learn_earn_opportunities %}
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">{{ opportunity.name }}</h5>
+                <p class="card-text">{{ opportunity.description }}</p>
+                <a href="{{ opportunity.link }}" class="btn btn-primary" target="_blank">Explore</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

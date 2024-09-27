@@ -1,0 +1,26 @@
+<!-- work_now.html -->
+{% extends 'base.html' %}
+
+{% block title %}Work Now{% endblock %}
+
+{% block content %}
+<h2>Work Now</h2>
+<div class="row">
+    {% for job in jobs %}
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">{{ job.title }}</h5>
+                <p class="card-text">{{ job.description }}</p>
+                <p class="card-text">Estimated Completion Time: {{ job.completion_time }}</p>
+                <a href="{{ job.signup_link }}" class="btn btn-primary" target="_blank">Start</a>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-md-12">
+        <p>No jobs available at the moment.</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
