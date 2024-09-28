@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'accounts',
-    'employment'
+    'employment',
+    'cv_revamp',
 ]
 
 MIDDLEWARE = [
