@@ -22,5 +22,7 @@ urlpatterns = [
     path('', include('accounts.urls')),
     path('chatbot/', include('chatbot.urls')),
     path('employment/', include('employment.urls')),
-    path('cv/', include('cv_revamp.urls'))
+    path('cv/', include('cv_revamp.urls')),
+    path('interview/', include('simulation.urls')),
+    
 ]

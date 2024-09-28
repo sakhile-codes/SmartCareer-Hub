@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'accounts',
     'employment',
     'cv_revamp',
+    'simulation',
 ]
 
 MIDDLEWARE = [
