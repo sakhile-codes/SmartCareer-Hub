@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'employment',
     'cv_revamp',
     'simulation',
+    'chatbot'
 ]
 
 MIDDLEWARE = [
