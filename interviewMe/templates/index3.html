@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interview Simulation</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Ensure everything fits on the screen */
+    html, body {
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      scroll-behavior: smooth;
+    }
+    #app-container {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    #video-section {
+      flex: 3;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    #user-video {
+      height: 100%;
+      object-fit: cover;
+    }
+    .rounded-lg {
+      border-radius: 1rem;
+    }
+    .shadow-lg {
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+    .shadow-inner {
+      box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    /* AI Speaking Wave Animation */
+    .wave-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+    }
+    .wave {
+      width: 120px;
+      height: 120px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    #space-y-2 {
+    display: none;
+  }
+    
+
+    #kins-kins-popup {
+      display: none;
+  }
+
+
+
+    .wave-bar {
+      width: 10px;
+      height: 20px;
+      background-color: #4F46E5;
+      animation: wave 1.2s infinite;
+      animation-play-state: paused;
+      border-radius: 5px;
+    }
+    .wave-bar:nth-child(2) {
+      animation-delay: 0.1s;
+    }
+    .wave-bar:nth-child(3) {
+      animation-delay: 0.2s;
+    }
+    .wave-bar:nth-child(4) {
+      animation-delay: 0.3s;
+    }
+    .wave-bar:nth-child(5) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes wave {
+      0%, 100% {
+        height: 20px;
+      }
+      50% {
+        height: 60px;
+      }
+    }
+
+    /* Button Styling */
+    button {
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    button:hover {
+      transform: translateY(-3px);
+    }
+
+    /* Hide PlayAI widget */
+    .playai-widget {
+      visibility: hidden !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      z-index: -9999 !important;
+    }
+  </style>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/play-ai-embed"></script>
+</head>
+<body class="bg-gray-900 text-white">
+  <div id="app-container" class="container mx-auto p-4">
+    <header class="text-center mb-6">
+      <h1 class="text-4xl font-extrabold tracking-tight text-indigo-500">AI Interview Simulation</h1>
+      <p class="text-base text-gray-400 mt-2">Practice your interview skills with real-time voice and video AI assistance.</p>
+    </header>
+
+    <section id="video-section" class="rounded-lg shadow-lg">
+      <div class="relative bg-gray-800 flex-1 rounded-lg shadow-inner">
+        <video id="user-video" class="w-full h-full rounded-lg" autoplay playsinline></video>
+        <div class="absolute top-4 left-4 bg-gray-900 text-sm px-3 py-1 rounded-full shadow-md">
+          <p class="text-gray-300">User Video</p>
+        </div>
+      </div>
+
+      <div class="relative bg-gray-800 flex-1 rounded-lg shadow-inner">
+        <div class="wave-container">
+          <div class="wave">
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+          </div>
+        </div>
+        <div class="absolute top-4 left-4 bg-gray-900 text-sm px-3 py-1 rounded-full shadow-md">
+          <p class="text-gray-300">AI Speaking</p>
+        </div>
+      </div>
+    </section>
+    <div class="w-full pt-5" style="display: none;">
+    </div>
+
+    <div class="flex justify-center mt-8 I have arrived" >
+      <button id="callButton" class="bg-blue-600 text-white font-semibold px-6 py-3 rounded-full shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50">
+        Start Interview
+
+      </button>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+
+    const callButton = document.getElementById('callButton');
+    const userVideo = document.getElementById('user-video');
+    const waveBars = document.querySelectorAll('.wave-bar');
+    document.getElementById('callButton').addEventListener('click', function() {
+    document.getElementById('kins-kins-popup').style.display = 'none'; 
+    document.getElementById('.space-y-2.').style.display = 'none'; 
+      });
+
+    // Function to control the AI speaking wave animation
+    function triggerAiSpeaking(isSpeaking) {
+      waveBars.forEach(bar => {
+        bar.style.animationPlayState = isSpeaking ? 'running' : 'paused';
+      });
+    }
+    
+    document.getElementById('callButton').addEventListener('click', function() {
+    document.getElementById('kins-kins-popup').style.display = 'none'; // Hide the div
+      });
+
+    document.getElementById('callButton').addEventListener('click', function() {
+    document.querySelector('.space-y-2').style.display = 'none'; // Assuming it has the classes
+});
+    // Access user's webcam and stream to the user video element
+    function enableUserWebcam() {
+      navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+        .then(stream => {
+          userVideo.srcObject = stream;
+        })
+        .catch(err => {
+          console.error("Error accessing webcam: ", err);
+        });
+    }
+
+    // Start Play.ai conversation
+    callButton.addEventListener('click', () => {
+  setTimeout(() => {
+    const style = document.createElement('style');
+  style.innerHTML = `.playai-widget { display: none !important; }`;
+  document.head.appendChild(style);
+    const playaiWidgets = document.querySelectorAll('.playai-widget');
+    playaiWidgets.forEach(widget => {
+      widget.parentNode.removeChild(widget);
+    });
+  }, 10); // Delay by 100 milliseconds
+
+      PlayAI.open('kwjlkrjoeijflknf'); // Use your Play.ai project ID
+      triggerAiSpeaking(true); // Start AI animation
+      enableUserWebcam(); // Enable the webcam stream
+
+      // Listen to AI events
+      PlayAI.on('message', (msg) => {
+        triggerAiSpeaking(false); // Stop AI animation after response
+      });
+
+      // Hide the PlayAI widget
+      const playaiWidget = document.querySelector('.playai-widget');
+      if (playaiWidget) {
+        playaiWidget.style.visibility = 'hidden';
+        playaiWidget.style.opacity = 0;
+        playaiWidget.style.pointerEvents = 'none';
+        playaiWidget.style.zIndex = '-9999';
+      }
+    });
+  </script>
+</body>
+</html>
